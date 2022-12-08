@@ -1,0 +1,85 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 8fr 1fr;
+  gap: 3vh;
+  width: 100vw;
+  height: 100vh;
+}
+header {
+  width: 100vw;
+  background-color: aquamarine;
+}
+
+.attempt {
+  display: flex;
+  justify-content: center;
+  gap: 1vh;
+}
+
+.grid {
+  margin: 3vh 1vh;
+  display: flex;
+  flex-flow: column;
+  gap: 1vh;
+}
+
+.tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: outset 0.75vh #bbbbbb;
+  border-radius: 1vh;
+  font-size: 4vh;
+  font-weight: bold;
+  height: 7.5vh;
+  width: 7.5vh;
+}
+/* @-webkit-keyframes blink {
+  50% {
+    opacity: 0.2;
+  }
+  80% {
+    opacity: 0.5;
+  }
+}
+@keyframes blink {
+  50% {
+    opacity: 0.2;
+  }
+  80% {
+    opacity: 0.5;
+  }
+}
+.focused {
+  -webkit-animation: blink 2s linear infinite;
+          animation: blink 2s linear infinite;
+} */
+.keyboard {
+  display: flex;
+  flex-flow: column;
+  gap: 1vh;
+  margin: 3vh;
+}
+.line {
+  display: flex;
+  justify-content: center;
+  gap: 1vh;
+}
+.key {
+  height: 5vh;
+  min-width: 5vw;
+  border-radius: 2vh;
+}
+.key:hover {
+  background-color: aquamarine;
+}
+.key[value="Enter"], .key[value="Back"]{
+  min-width: 10vw;
+}
