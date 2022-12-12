@@ -8,38 +8,35 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 8fr 1fr;
-  gap: 3vh;
+  gap: 1rem;
   width: 100vw;
   height: 100vh;
 }
 header {
-  width: 100vw;
   background-color: aquamarine;
 }
 
 .attempt {
   display: flex;
   justify-content: center;
-  gap: 1vh;
+  gap: 1rem;
 }
 
 .grid {
-  margin: 3vh 1vh;
+  margin: 2rem;
   display: flex;
   flex-flow: column;
-  gap: 1vh;
+  gap: 1rem;
 }
 
 .tile {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: outset 0.75vh #bbbbbb;
-  border-radius: 1vh;
-  font-size: 4vh;
+  text-align: center;
+  border: outset 0.3rem #bbbbbb;
+  border-radius: 0.5rem;
+  font-size: 2rem;
   font-weight: bold;
-  height: 7.5vh;
-  width: 7.5vh;
+  height: 3.5rem;
+  width: 3.5rem;
 }
 /* @-webkit-keyframes blink {
   50% {
@@ -64,22 +61,22 @@ header {
 .keyboard {
   display: flex;
   flex-flow: column;
-  gap: 1vh;
-  margin: 3vh;
+  gap: 0.5rem;
+  margin: 1rem;
 }
 .line {
   display: flex;
   justify-content: center;
-  gap: 1vh;
+  gap: 0.5rem;
 }
 .key {
-  height: 5vh;
-  min-width: 5vw;
-  border-radius: 2vh;
+  height: 2.5rem;
+  min-width: 2.5rem;
+  border-radius: 1rem;
 }
 .key:hover {
   background-color: aquamarine;
 }
 .key[value="Enter"], .key[value="Back"]{
-  min-width: 10vw;
+  min-width: 6rem;
 }
