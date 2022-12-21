@@ -9,9 +9,11 @@ export function WordleApp() {
 
   return (
     <wordleContext.Provider value={wordleApi}>
-      <Header />
-      <Playground />
-      <Keyboard />
+      <div className="flex flex-col h-screen justify-between">
+        <Header />
+        <Playground />
+        <Keyboard />
+      </div>
     </wordleContext.Provider>
   );
 }

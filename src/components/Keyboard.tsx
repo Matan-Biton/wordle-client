@@ -7,14 +7,20 @@ export function Keyboard() {
   const rows = [
     ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
     ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
-    ["Enter", "Z", "X", "C", "V", "B", "N", "M", "Backspace"],
+    ["Z", "X", "C", "V", "B", "N", "M"],
   ];
   return (
-    <div className="keyboard">
+    <div id="keyboard" className="flex flex-col gap-2 mb-10">
       {rows.map((row, i) => (
-        <div key={`keyBoardLine${i + 1}`} className="line">
-          {row.map((key) => (
-            <button key={key} className="key" value={key} onClick={() => keyPassed(key)}>
+        <div key={i} className="flex gap-2 justify-center">
+          {row.map((key, i) => (
+            <button
+              key={i}
+              className="border-yellow-700 border-2 rounded-md hover:bg-teal-500"
+              style={{ minWidth: "2em" }}
+              value={key}
+              onClick={() => keyPassed(key)}
+            >
               {key}
             </button>
           ))}

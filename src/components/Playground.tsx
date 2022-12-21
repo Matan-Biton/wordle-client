@@ -1,15 +1,22 @@
-import { useId, useContext } from "react";
+import { useContext } from "react";
 import { wordleContext } from "../providers/wordleContext";
 
 export function Playground() {
-  const {inputsGrid} = useContext(wordleContext);
+  const { inputsGrid } = useContext(wordleContext);
 
   return (
-    <div className="grid">
-      {inputsGrid.map((row, i) => (
-        <form className="attempt" key={i} id={`${i + 1}`}>
-          {row.map((char) => (
-            <input key={useId()} type="text" className="tile" value={char} readOnly />
+    <div className="flex flex-col gap-2 md:gap-4">
+      {inputsGrid.map((row, attemptIdx) => (
+        <form className="flex justify-center gap-2 md:gap-4" key={attemptIdx}>
+          {row.map((char, charIdx) => (
+            <input
+              key={charIdx}
+              type="text"
+              className="tile text-center text-2xl font-bold border-2 border-gray-400 rounded-md"
+              value={char}
+              style={{ width: "7vh", height: "7vh" }}
+              readOnly
+            />
           ))}
         </form>
       ))}

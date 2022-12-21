@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+body{
+    font-size: clamp(.5rem, 3.5vmin, 1.5rem);
+}
+
+.bul {
+    background-color: green;
+}
+
+.cow {
+    background-color: yellow;
+}
+
+.missed {
+    background-color: gray;
+}
+
+@keyframes myBlink {
+    50% {
+        opacity: 0.2;
+    }
+    80% {
+        opacity: 0.5;
+    }
+}
+
+.tile:focus {
+    animation: myBlink linear infinite 2s;
+}
+
