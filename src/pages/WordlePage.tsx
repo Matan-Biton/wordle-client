@@ -1,8 +1,8 @@
 import { useWordleUI } from "../hooks/useWordleUI";
 import { wordleContext } from "../providers/wordleContext";
-import { Header } from "./Header";
-import { Playground } from "./Playground";
-import { Keyboard } from "./Keyboard";
+import { Header } from "../components/Header";
+import { Playground } from "../components/Playground";
+import { Keyboard } from "../components/Keyboard";
 
 export function WordleApp() {
   const wordleApi = useWordleUI();

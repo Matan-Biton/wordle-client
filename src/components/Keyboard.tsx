@@ -9,20 +9,21 @@ export function Keyboard() {
     ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
     ["Z", "X", "C", "V", "B", "N", "M"],
   ];
+
   return (
     <div id="keyboard" className="flex flex-col gap-2 mb-10">
       {rows.map((row, i) => (
         <div key={i} className="flex gap-2 justify-center">
           {row.map((key, i) => (
-            <button
+        <button
               key={i}
               className="border-yellow-700 border-2 rounded-md hover:bg-teal-500"
               style={{ minWidth: "2em" }}
-              value={key}
-              onClick={() => keyPassed(key)}
-            >
-              {key}
-            </button>
+          value={key}
+          onClick={() => keyPassed(key)}
+        >
+          {key}
+        </button>
           ))}
         </div>
       ))}
