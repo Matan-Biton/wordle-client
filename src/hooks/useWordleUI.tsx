@@ -2,17 +2,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { wordsDB } from "../../wordsDB/configDB";
 
 export function useWordleUI() {
-  const [answer, setAnswer] = useState("");
-
-  useEffect(() => {
-    const SQL = "SELECT word FROM words ORDER BY RANDOM() LIMIT 1";
-    const setRandWord = async () => {
-      const randWord = await wordsDB.query(SQL);
-      setAnswer(randWord.rows[0]);
-    };
-
-    setRandWord();
-  }, []);
+  const [answer, setAnswer] = useState("MATAN");
 
   const [curAttempt, setCurAttempt] = useState<number>(0);
   const [inputsGrid, setInputGrid] = useState<string[][]>([
