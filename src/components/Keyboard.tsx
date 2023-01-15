@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { wordleContext } from "../providers/wordleContext";
 
 export function Keyboard() {
-  // const { keyPassed } = useContext(wordleContext);
+  const { keyPassed } = useContext(wordleContext);
 
   const rows = [
     ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
@@ -15,15 +15,15 @@ export function Keyboard() {
       {rows.map((row, i) => (
         <div key={i} className="flex gap-2 justify-center">
           {row.map((key, i) => (
-        <button
+            <button
               key={i}
-              className="border-yellow-700 border-2 rounded-md hover:bg-teal-500"
+              className="border-yellow-700 border-2 rounded-md " //hover
               style={{ minWidth: "2em" }}
-          value={key}
-          // onClick={() => keyPassed(key)}
-        >
-          {key}
-        </button>
+              value={key}
+              // onClick={() => keyPassed(key)}
+            >
+              {key}
+            </button>
           ))}
         </div>
       ))}

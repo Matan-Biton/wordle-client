@@ -8,7 +8,7 @@ body{
     font-size: clamp(.5rem, 3.5vmin, 1.5rem);
 }
 
-.bul {
+.bull {
     background-color: green;
 }
 

@@ -1,50 +1,22 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { wordsDB } from "../../wordsDB/configDB";
 
 export function useWordleUI() {
-  const [answer, setAnswer] = useState("MATAN");
-
-  const [curAttempt, setCurAttempt] = useState<number>(0);
-  const [inputsGrid, setInputGrid] = useState<string[][]>([
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-  ]);
-
-  function firstEmpty() {
-    return inputsGrid[curAttempt].indexOf("");
-  }
-
   function keyPassed(key: string) {
-    if (key.match(/^[a-zA-Z]$/)) {
-      const newGrid = [...inputsGrid];
-      newGrid[curAttempt][firstEmpty()] = key;
-      setInputGrid(newGrid);
+    if (key.match(/^[a-z]$/i)) {
+      
+      // const targetInput = document.activeElement as HTMLInputElement;
+      // console.log(targetInput);
+      // targetInput.value = key;
     }
   }
 
-  // function checkWord(event: ChangeEvent) {
-  // }
-
-  // function deleteLastChar() {
-  //   if (firstEmpty() === 0) {
-  //     return;
-  //   }
-  //   const positionToErase = firstEmpty() === -1 ? 5 : firstEmpty();
-  //   const newGrid = [...inputsGrid];
-  //   newGrid[curAttempt][positionToErase - 1] = "";
-  //   setInputGrid(newGrid);
-  // }
+  const [userName, setUserName] = useState('')
+  useEffect(() => {
+    setUserName('Matan')
+  }, [])
 
   return {
-    answer,
-    curAttempt,
-    inputsGrid,
-    firstEmpty,
     keyPassed,
-    // checkWord,
-    // deleteLastChar,
+    userName,
   };
 }
