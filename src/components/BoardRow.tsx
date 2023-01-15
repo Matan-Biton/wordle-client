@@ -38,12 +38,13 @@ export default function BoardRow({ curAttemptNum, attemptIdx, nextAttempt }: att
     fetch("http://localhost:3001/check_word", postOptions(attempt))
       .then((res) => res.json())
       .then((body) => setAttempt(body.attempt));
+    
     nextAttempt();
   };
 
-  const handleWordUpdate = (charIdx: number, value: string) => {
+  const handleWordUpdate = (charIdx: number, char: string) => {
     setAttempt((attempt) => {
-      attempt[charIdx].char = value.toUpperCase();
+      attempt[charIdx].char = char.toUpperCase();
       if (attempt.every((curCharObj) => curCharObj.char !== "")) {
         isWordCompleted.current = true;
       }

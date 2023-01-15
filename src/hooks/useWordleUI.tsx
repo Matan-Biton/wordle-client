@@ -15,8 +15,12 @@ export function useWordleUI() {
     setUserName('Matan')
   }, [])
 
+  const [isHelpOpen, setIsHelpOpen] = useState(false)
+
   return {
     keyPassed,
     userName,
+    isHelpOpen,
+    setIsHelpOpen,
   };
 }
