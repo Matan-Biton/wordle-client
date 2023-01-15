@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 interface atts {
-  attemptNum: number;
+  curAttemptNum: number;
   attemptIdx: number;
   nextAttempt: () => void;
 }
-export default function BoardRow({ attemptNum, attemptIdx, nextAttempt }: atts) {
+export default function BoardRow({ curAttemptNum, attemptIdx, nextAttempt }: atts) {
   const isMounting = useRef(true);
   const isWordCompleted = useRef(false);
   const [attempt, setAttempt] = useState([
@@ -16,15 +16,15 @@ export default function BoardRow({ attemptNum, attemptIdx, nextAttempt }: atts) 
   ]);
 
   useEffect(() => {
-    if (isMounting.current) {
-      isMounting.current = false;
-    } else {
-      checkWord();
-    }
+    checkWord();
   }, [isWordCompleted.current]);
 
   const checkWord = async () => {
-    if (isWordCompleted.current === false) return;
+    if (isMounting.current) {
+      isMounting.current = false;
+      return
+    }
+    if (!isWordCompleted.current) return;
     const postOptions = (bodyContent: any) => {
       return {
         method: "post",
@@ -56,7 +56,7 @@ export default function BoardRow({ attemptNum, attemptIdx, nextAttempt }: atts) 
       {attempt.map((charObj, charIdx) => (
         <input
           key={charIdx}
-          disabled={attemptNum !== attemptIdx}
+          disabled={curAttemptNum !== attemptIdx}
           type="text"
           className={`tile text-center text-2xl font-bold border-2 border-gray-400 rounded-md w-[7vh] h-[7vh] ${charObj.status}`}
           value={charObj.char}
