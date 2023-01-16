@@ -1,18 +1,20 @@
-import { createContext } from "react";
+import { createContext, useRef } from "react";
 
-interface API {
-  keyPassed: (key: string) => void;
-  userName: string,
-  isHelpOpen: boolean,
-  setIsHelpOpen: (newState: boolean) => void
-}
+// type API = {
+//   // keyPassed: (key: string) => void;
+//   userName: string;
+//   isHelpOpen: boolean;
+//   setIsHelpOpen: React.Dispatch<React.SetStateAction<boolean>>;
+//   activeElementIndex: React.MutableRefObject<number>;
+// }
 
-const initContext: API = {
-  keyPassed: () => { },
-  userName: '',
-  isHelpOpen: false,
-  setIsHelpOpen: () => { }
-}
+// // keyPassed: () => { },
+// const initContext: API = {
+//   userName: '',
+//   isHelpOpen: false,
+//   setIsHelpOpen: () => { },
+//   activeElementIndex: useRef(0),
+// }
 
-export const wordleContext = createContext<API>(initContext);
+export const wordleContext = createContext<any | null>(null);
 

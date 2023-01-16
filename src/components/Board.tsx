@@ -1,9 +1,14 @@
 import { useContext, useRef, useState } from "react";
-import BoardRow from "./BoardRow";
+import { wordleContext } from "../providers/wordleContext";
+import { charObj } from "./types";
+// import BoardRow from "./BoardRow";
 
 export function Board() {
-  const [curAttempt, setCurAttempt] = useState(0)
-  // const curAttempt = useRef(0)
+  const { activeElementIndex, board } = useContext(wordleContext);
+
+  // console.log(board);
+
+  const [curAttempt, setCurAttempt] = useState(0);
   // const nextAttempt = () => curAttempt.current++
 
   return (

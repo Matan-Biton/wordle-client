@@ -10,7 +10,7 @@ export function WordleApp() {
 
   return (
     <wordleContext.Provider value={wordleApi}>
-      <div className="flex flex-col h-screen justify-between">
+      <div className="flex flex-col h-screen justify-between items-center">
         <HelpModal />
         <Header />
         <Board />

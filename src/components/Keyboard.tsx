@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { wordleContext } from "../providers/wordleContext";
 
 export function Keyboard() {
-  const { keyPassed } = useContext(wordleContext);
+  // const { keyPassed } = useContext(wordleContext);
 
   const rows = [
     ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
