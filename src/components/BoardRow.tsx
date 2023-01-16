@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
-interface atts {
-  curAttemptNum: number;
-  attemptIdx: number;
-  nextAttempt: () => void;
-}
+import { useState, useEffect, useRef, useContext } from "react";
+import { wordleContext } from "../providers/wordleContext";
+import { serverURL, atts, colorMap, charObj } from "../types";
+
 export default function BoardRow({ curAttemptNum, attemptIdx, nextAttempt }: atts) {
-  const isMounting = useRef(true);
+  const { setUsedLettersMap, usedLettersMap } = useContext(wordleContext);
+  const curActiveChar = useRef(0);
   const isWordCompleted = useRef(false);
-  const [attempt, setAttempt] = useState([
+  const [attempt, setAttempt] = useState<charObj[]>([
     { char: "", status: "" },
     { char: "", status: "" },
     { char: "", status: "" },
@@ -20,10 +19,6 @@ export default function BoardRow({ curAttemptNum, attemptIdx, nextAttempt }: att
   }, [isWordCompleted.current]);
 
   const checkWord = async () => {
-    if (isMounting.current) {
-      isMounting.current = false;
-      return
-    }
     if (!isWordCompleted.current) return;
     const postOptions = (bodyContent: any) => {
       return {
@@ -34,23 +29,32 @@ export default function BoardRow({ curAttemptNum, attemptIdx, nextAttempt }: att
         },
       };
     };
-
-    fetch("http://localhost:3001/check_word", postOptions(attempt))
+    fetch(`${serverURL}check_word`, postOptions(attempt))
       .then((res) => res.json())
-      .then((body) => setAttempt(body.attempt));
-    
+      .then((body) => {
+        setAttempt(body.attempt);
+        if (body.solved) winAchieved();
+      });
+
     nextAttempt();
   };
 
   const handleWordUpdate = (charIdx: number, char: string) => {
+    if (!char.match(/^[a-z]$/i)) return;
     setAttempt((attempt) => {
       attempt[charIdx].char = char.toUpperCase();
       if (attempt.every((curCharObj) => curCharObj.char !== "")) {
         isWordCompleted.current = true;
       }
+      curActiveChar.current += 1;
       return [...attempt];
     });
   };
+
+  function winAchieved() {
+    alert("Well Done, You Have Won!!!");
+    window.location.reload();
+  }
 
   return (
     <div className="flex justify-center gap-2">
@@ -59,8 +63,11 @@ export default function BoardRow({ curAttemptNum, attemptIdx, nextAttempt }: att
           key={charIdx}
           disabled={curAttemptNum !== attemptIdx}
           type="text"
-          className={`tile text-center text-2xl font-bold border-2 border-gray-400 rounded-md w-[7vh] h-[7vh] ${charObj.status}`}
+          className={`tile text-center text-2xl font-bold border-2 border-gray-400 rounded-md w-[7vh] h-[7vh] ${colorMap.get(
+            charObj.status
+          )} cursor-pointer disabled:cursor-not-allowed`}
           value={charObj.char}
+          autoFocus={charIdx === curActiveChar.current}
           maxLength={1}
           onChange={(e) => {
             handleWordUpdate(charIdx, e.target.value);

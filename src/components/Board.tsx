@@ -1,8 +1,14 @@
-import { useContext, useRef, useState } from "react";
+import { useState } from "react";
 import BoardRow from "./BoardRow";
 
 export function Board() {
-  const [curAttempt, setCurAttempt] = useState(0)
+  const [curAttempt, setCurAttempt] = useState(0);
+
+  function lossAchieved() {
+    alert("loss achieved");
+    setCurAttempt(0)
+  }
+
   // const curAttempt = useRef(0)
   // const nextAttempt = () => curAttempt.current++
 
@@ -11,7 +17,9 @@ export function Board() {
       {Array.from(Array(5)).map((_, attemptIdx) => (
         <BoardRow
           attemptIdx={attemptIdx}
-          nextAttempt={() => setCurAttempt(cur => cur++)}
+          nextAttempt={() => {
+            curAttempt === 4 ? lossAchieved() : setCurAttempt(curAttempt + 1);
+          }}
           curAttemptNum={curAttempt}
           key={attemptIdx}
         />

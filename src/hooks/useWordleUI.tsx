@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export function useWordleUI() {
   function keyPassed(key: string) {
@@ -9,6 +9,13 @@ export function useWordleUI() {
       // targetInput.value = key;
     }
   }
+
+  const [usedLettersMap, setUsedLettersMap] = useState(new Map([
+    //TODO complete this implementation
+    ['bull', []],
+    ['cow', []],
+    ['missed', []],
+  ]))
 
   const [userName, setUserName] = useState('')
   useEffect(() => {
@@ -22,5 +29,7 @@ export function useWordleUI() {
     userName,
     isHelpOpen,
     setIsHelpOpen,
+    usedLettersMap,
+    setUsedLettersMap
   };
 }
