@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build": "tsc && vite build",
+    "build": "npx tailwindcss -i ./src/input.css -o ./dist/output.css && tsc && vite build",
     "preview": "vite preview",
     "start": "npx tailwindcss -i ./src/input.css -o ./dist/output.css && vite --port 3000",
     "tw-w": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
