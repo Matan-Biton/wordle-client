@@ -20,16 +20,14 @@ export default function BoardRow({ curAttemptNum, attemptIdx, nextAttempt }: att
 
   const checkWord = async () => {
     if (attempt.some((curCharObj) => curCharObj.char === "")) return;
-    const postOptions = (bodyContent: any) => {
-      return {
-        method: "post",
-        body: JSON.stringify(bodyContent),
-        headers: {
-          "content-type": "application/json",
-        },
-      };
-    };
-    fetch(`${serverURL}check_word`, postOptions(attempt))
+
+    fetch(`${serverURL}check_word`, {
+      method: "post",
+      body: JSON.stringify(attempt),
+      headers: {
+        "content-type": "application/json",
+      },
+    })
       .then((res) => res.json())
       .then((body) => {
         setAttempt(body.attempt);
