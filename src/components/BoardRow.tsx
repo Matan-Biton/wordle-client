@@ -19,7 +19,7 @@ export default function BoardRow({ curAttemptNum, attemptIdx, nextAttempt }: att
   }, [isWordCompleted.current]);
 
   const checkWord = async () => {
-    if (!isWordCompleted.current) return;
+    if (attempt.some((curCharObj) => curCharObj.char === "")) return;
     const postOptions = (bodyContent: any) => {
       return {
         method: "post",
