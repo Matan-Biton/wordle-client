@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { colorMap } from "../constsAndTypes";
+import { colorMap } from "../constantsAndTypes";
 import { wordleContext } from "../providers/wordleContext";
 
 export function Board() {
@@ -20,7 +20,7 @@ export function Board() {
               className={`tile text-center text-2xl font-bold uppercase border-2 border-gray-400 rounded-md w-[7vh] h-[7vh] ${colorMap.get(
                 tile.status
               )} cursor-pointer disabled:cursor-not-allowed`}
-              value={tile.char}
+              defaultValue={tile.char}
               maxLength={1}
               onKeyDown={validation}
               onChange={(e) => handleInputChange(e, guessIndex, charIndex)}

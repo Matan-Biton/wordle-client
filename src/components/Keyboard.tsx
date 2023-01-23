@@ -1,4 +1,4 @@
-import { colorMap } from "../constsAndTypes";
+import { colorMap } from "../constantsAndTypes";
 import { useContext } from "react";
 import { wordleContext } from "../providers/wordleContext";
 

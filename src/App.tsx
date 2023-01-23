@@ -3,7 +3,8 @@ import { wordleContext } from "./providers/wordleContext";
 import { Header } from "./components/Header";
 import { Board } from "./components/Board";
 import { Keyboard } from "./components/Keyboard";
-import HelpModal from "./components/HelpModal";
+import { HelpModal } from "./components/HelpModal";
+import { LoginModal } from "./components/LoginModal";
 
 export function App() {
   const wordleApi = useWordleUI();
@@ -11,7 +12,8 @@ export function App() {
   return (
     <wordleContext.Provider value={wordleApi}>
       <div className="flex flex-col h-screen justify-between items-center">
-        <HelpModal />
+        {wordleApi.isHelpOpen && <HelpModal />}
+        {wordleApi.isLoginOpen && <LoginModal />}
         <Header />
         <Board />
         <Keyboard />

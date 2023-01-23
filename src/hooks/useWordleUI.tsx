@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { charObj, WORD_LENGTH, GUESSES, serverURL } from "../constsAndTypes";
+import { charObj, WORD_LENGTH, GUESSES, serverURL } from "../constantsAndTypes";
 
 export function useWordleUI() {
   class Game {
@@ -28,28 +28,79 @@ export function useWordleUI() {
   const [keyboard, setKeyboard] = useState([[]] as charObj[][]);
   const [board, setBoard] = useState([[]] as charObj[][]);
   const [isHelpOpen, setIsHelpOpen] = useState(false);
-  const [userName, setUserName] = useState("");
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [userName, setUserName] = useState("Guest");
+  const [gameStatus, setGameStatus] = useState("on");
 
   async function checkWord(idx: number) {
-    fetch(`${serverURL}${board[idx].map(Obj => Obj.char).join('')}`)
+    fetch(`${serverURL}${board[idx].map((Obj) => Obj.char).join("")}`)
       .then((res) => res.json())
       .then((body) => {
-        const newBoard = [...board]
-        newBoard[idx].forEach((charObj, idx) => charObj.status = body.split('')[idx])
-        setBoard(newBoard);
+        styleBoard(idx, body);
+        body === "bbbbb" && gameEnded("won");
+        idx === 4 && body !== "bbbbb" && gameEnded("lose");
       });
-  };
+  }
 
+  function gameEnded(endedWith: string) {
+    if (userName !== "Guest") {
+      endedWith === "won" &&
+        localStorage.setItem("wins", (Number(localStorage.getItem("wins")) + 1).toString());
+      endedWith === "lose" &&
+        localStorage.setItem("losses", (Number(localStorage.getItem("losses")) + 1).toString());
+    }
+    alert(`You just ${endedWith} the game`);
+    setGameStatus(endedWith);
+  }
+
+  function styleBoard(row: number, relativeTo: string) {
+    const newBoard = [...board];
+    newBoard[row].forEach(
+      (charObj, idx) => (charObj.status = relativeTo.split("")[idx] as "b" | "c" | "m" | "")
+    );
+    styleKeyboard(newBoard[row]);
+    setBoard(newBoard);
+  }
+
+  function styleKeyboard(checkedBoardRow: charObj[]) {
+    function helper(statusToCheck: "m" | "c" | "b") {
+      checkedBoardRow
+        .filter((e) => e.status === statusToCheck)
+        .forEach((char) => {
+          const row = "QWERTYUIOP".includes(char.char)
+            ? 0
+            : "ASDFGHJKL".includes(char.char)
+            ? 1
+            : 2;
+          newKeyboard[row][newKeyboard[row].findIndex((key) => key.char === char.char)].status =
+            statusToCheck;
+        });
+    }
+    const newKeyboard = [...keyboard];
+    // @ts-ignore
+    ["m", "c", "b"].forEach(helper);
+    setKeyboard(newKeyboard);
+  }
 
   useEffect(() => {
-    setUserName("Guest");
+    const user = localStorage.getItem("user");
+    user && setUserName(user);
   }, []);
+
+  useEffect(() => {
+    if (userName !== "Guest") {
+      localStorage.setItem("user", userName);
+      localStorage.setItem("wins", localStorage.getItem("wins") || "0");
+      localStorage.setItem("losses", localStorage.getItem("losses") || "0");
+    }
+  }, [userName]);
 
   useEffect(() => {
     const newGame = new Game();
     setKeyboard(newGame.keyboard);
     setBoard(newGame.board);
-  }, [userName]);
+    setGameStatus("on");
+  }, [userName, gameStatus]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -58,8 +109,7 @@ export function useWordleUI() {
   ) => {
     board[guessIndex][charIndex].char = e.target.value.toUpperCase();
     if (board[guessIndex].every((Obj) => Obj.char !== "")) {
-      // setBoard([...board]);
-      checkWord(guessIndex)
+      checkWord(guessIndex);
     } else {
       setBoard(board);
     }
@@ -69,9 +119,15 @@ export function useWordleUI() {
     setIsHelpOpen(setTo);
   };
 
-  const passNewName = (ref: React.MutableRefObject<null>) => {
-    if (!ref.current) return;
-    setUserName(ref.current);
+  const handleLoginModal = (setTo: boolean) => {
+    setIsLoginOpen(setTo);
+  };
+
+  const passNewName = (ref: React.MutableRefObject<HTMLInputElement>) => {
+    if (!ref.current || !ref.current.value) return;
+    setIsLoginOpen(false);
+    setUserName(ref.current.value);
+    ref.current.value = "";
   };
 
   return {
@@ -82,5 +138,7 @@ export function useWordleUI() {
     isHelpOpen,
     userName,
     passNewName,
+    isLoginOpen,
+    handleLoginModal,
   };
 }
