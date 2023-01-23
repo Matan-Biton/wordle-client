@@ -1,7 +1,7 @@
 import { createContext, useRef } from "react";
 import { charObj } from "../constantsAndTypes";
 
-type API = {
+export type API = {
   keyboard: charObj[][];
   board: charObj[][];
   handleInputChange: (
@@ -13,6 +13,8 @@ type API = {
   handleLoginModal: (setTo: boolean) => void;
   userName: string;
   passNewName: (ref: React.MutableRefObject<null>) => void;
+  isLoginOpen: boolean;
+  isHelpOpen: boolean;
 };
 
 const initContext: API = {
@@ -23,6 +25,8 @@ const initContext: API = {
   userName: "",
   passNewName: () => {},
   handleLoginModal: () => {},
+  isLoginOpen: false,
+  isHelpOpen: false,
 };
 
 export const wordleContext = createContext<API>(initContext);
