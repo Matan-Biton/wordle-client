@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { charObj, WORD_LENGTH, GUESSES, serverURL } from "../constantsAndTypes";
+import { charObj, WORD_LENGTH, GUESSES, serverURL, stylesCodes } from "../constantsAndTypes";
 
 export function useWordleUI() {
   class Game {
@@ -63,7 +63,7 @@ export function useWordleUI() {
   }
 
   function styleKeyboard(checkedBoardRow: charObj[]) {
-    function helper(statusToCheck: "m" | "c" | "b") {
+    function helper(statusToCheck: stylesCodes) {
       checkedBoardRow
         .filter((e) => e.status === statusToCheck)
         .forEach((char) => {
@@ -77,8 +77,8 @@ export function useWordleUI() {
         });
     }
     const newKeyboard = [...keyboard];
-    // @ts-ignore
-    ["m", "c", "b"].forEach(helper);
+    const toLoopOn: stylesCodes[] = ['m', 'c', 'b']
+    toLoopOn.forEach(helper);
     setKeyboard(newKeyboard);
   }
 

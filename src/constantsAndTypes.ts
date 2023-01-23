@@ -1,9 +1,11 @@
-export const GUESSES = 5
-export const WORD_LENGTH = 5
+export const GUESSES = 5;
+export const WORD_LENGTH = 5;
+
+export type stylesCodes = "b" | "c" | "m" | "";
 
 export type charObj = {
   char: string;
-  status: "b" | "c" | "m" | "";
+  status: stylesCodes;
 };
 
 export const colorMap = new Map([
