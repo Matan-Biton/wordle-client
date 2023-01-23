@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { wordleContext } from "../providers/wordleContext";
-import { colorMap } from "../types";
+import { colorMap } from "../constsAndTypes";
 
 export default function HelpModal() {
-  const { isHelpOpen, setIsHelpOpen } = useContext(wordleContext);
+  const { isHelpOpen, handleHelpModal } = useContext(wordleContext);
 
   return (
     <div
@@ -39,9 +39,7 @@ export default function HelpModal() {
       </div>
       <button
         className="p-2 h-fit bg-gray-500 rounded-md border-2 border-black hover:bg-gray-600"
-        onClick={() => {
-          setIsHelpOpen(false);
-        }}
+        onClick={() => handleHelpModal(false)}
       >
         Dismiss
       </button>

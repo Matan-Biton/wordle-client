@@ -1,17 +1,18 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { wordleContext } from "../providers/wordleContext";
 
 export default function HelpModal() {
-  const { userName, setUserName } = useContext(wordleContext);
+  const { userName, passNewName } = useContext(wordleContext);
 
-  const newUserName = "yossi";
+  const inputRef = useRef(null);
 
   return (
     <div>
+      <input type="text" ref={inputRef} placeholder={userName} />
       <button
         className="p-2 h-fit bg-gray-500 rounded-md border-2 border-black hover:bg-gray-600"
         onClick={() => {
-          setUserName(newUserName);
+          passNewName(inputRef);
         }}
       >
         Dismiss

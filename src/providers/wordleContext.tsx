@@ -1,20 +1,28 @@
 import { createContext, useRef } from "react";
+import { charObj } from "../constsAndTypes";
 
-// type API = {
-//   // keyPassed: (key: string) => void;
-//   userName: string;
-//   isHelpOpen: boolean;
-//   setIsHelpOpen: React.Dispatch<React.SetStateAction<boolean>>;
-//   activeElementIndex: React.MutableRefObject<number>;
-// }
+type API = {
+  keyboard: charObj[][];
+  board: charObj[][];
+  handleInputChange: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    guessIndex: number,
+    charIndex: number
+  ) => void;
+  handleHelpModal: (setTo: boolean) => void;
+  isHelpOpen: boolean;
+  userName: string;
+  passNewName: (ref: React.MutableRefObject<null>) => void;
+};
 
-// // keyPassed: () => { },
-// const initContext: API = {
-//   userName: '',
-//   isHelpOpen: false,
-//   setIsHelpOpen: () => { },
-//   activeElementIndex: useRef(0),
-// }
+const initContext: API = {
+  keyboard: [[]],
+  board: [[]],
+  handleInputChange: () => {},
+  handleHelpModal: () => {},
+  isHelpOpen: false,
+  userName: "",
+  passNewName: () => {},
+};
 
-export const wordleContext = createContext<any | null>(null);
-
+export const wordleContext = createContext<API>(initContext);
