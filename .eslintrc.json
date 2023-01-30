@@ -12,6 +12,6 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {},
-  "ignorePatterns": ["node_modules"],
+  "ignorePatterns": ["**/*.test.ts"],
   "settings": { "react": { "version": "18.2.0" } }
 }
