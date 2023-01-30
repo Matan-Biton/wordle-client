@@ -1,12 +1,13 @@
 import { board } from "../constantsAndTypes";
 import { Attempt } from "./attempt";
+import React from "react";
 
 interface IProps {
   board: board;
   inputHandler: (e: React.ChangeEvent<HTMLInputElement>, guessIndex: number, charIndex: number) => void;
 }
 
-export function Board(props: IProps) {
+export function Board(props: IProps): React.ReactElement {
   const { board, inputHandler } = props;
 
   return (

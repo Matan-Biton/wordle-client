@@ -1,10 +1,11 @@
 import { colorMap } from "../constantsAndTypes";
+import React from "react";
 
 interface IProps {
   handleHelpModal: (setTo: boolean) => void;
 }
 
-export function HelpModal(props: IProps) {
+export function HelpModal(props: IProps): React.ReactElement {
   const { handleHelpModal } = props;
 
   return (

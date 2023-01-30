@@ -1,10 +1,10 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 
 interface IProps {
   passNewName: (ref: React.MutableRefObject<HTMLInputElement | null>) => void;
 }
 
-export function LoginModal(props: IProps) {
+export function LoginModal(props: IProps): React.ReactElement {
   const { passNewName } = props;
 
   const inputRef = useRef(null);

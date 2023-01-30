@@ -3,10 +3,10 @@ import { Board } from "./components/Board";
 import { Keyboard } from "./components/Keyboard";
 import { HelpModal } from "./components/HelpModal";
 import { LoginModal } from "./components/LoginModal";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { attempt, board, charObj, GUESSES, serverURL, stylesCodes, WORD_LENGTH } from "./constantsAndTypes";
 
-export function App() {
+export function App() : React.ReactElement {
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [board, setBoard] = useState([[]] as board);
@@ -78,10 +78,10 @@ export function App() {
   useEffect(() => {
     fetchWordKey();
     setBoard(
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       Array.from(Array(GUESSES)).map((_) =>
-        Array.from(Array(WORD_LENGTH)).map((_) => {
-          return { char: "", status: "" } as charObj;
-        })
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        Array.from(Array(WORD_LENGTH)).map((_) => ({ char: "", status: "" } as charObj))
       )
     );
     setGameStatus("on");

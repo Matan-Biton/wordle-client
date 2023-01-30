@@ -7,7 +7,7 @@ interface IProps {
   inputHandler: (e: React.ChangeEvent<HTMLInputElement>, guessIndex: number, charIndex: number) => void;
 }
 
-export function Attempt(props: IProps) {
+export function Attempt(props: IProps): React.ReactElement {
   const { attempt, attemptIdx, inputHandler } = props;
 
   const validation = (e: React.KeyboardEvent<HTMLInputElement>) => {

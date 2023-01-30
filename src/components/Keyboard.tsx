@@ -1,11 +1,12 @@
 import { board, colorMap, stylesCodes } from "../constantsAndTypes";
+import React from "react";
 
 interface IProps {
   board: board;
   getStyleCode: (char: string, board: board) => stylesCodes;
 }
 
-export function Keyboard(props: IProps) {
+export function Keyboard(props: IProps): React.ReactElement {
   const { board, getStyleCode } = props;
   const qwertyTwoDimensionalArray = [
     ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
