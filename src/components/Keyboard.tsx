@@ -1,28 +1,31 @@
-import { colorMap } from "../constantsAndTypes";
-import { useContext } from "react";
-import { wordleContext } from "../providers/wordleContext";
+import { board, colorMap, stylesCodes } from "../constantsAndTypes";
 
-export function Keyboard() {
-  const { keyboard } = useContext(wordleContext);
+interface IProps {
+  board: board;
+  getStyleCode: (char: string, board: board) => stylesCodes;
+}
+
+export function Keyboard(props: IProps) {
+  const { board, getStyleCode } = props;
+  const qwertyTwoDimensionalArray = [
+    ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+    ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
+    ["Z", "X", "C", "V", "B", "N", "M"],
+  ];
 
   return (
     <div id="keyboard" className="flex flex-col gap-2 mb-10">
-      {keyboard.map((row, i) => (
+      {qwertyTwoDimensionalArray.map((row, i) => (
         <div key={i} className="flex gap-2 justify-center">
-          {row.map((keyObj, i) => (
-            <button
+          {row.map((key, i) => (
+            <div
               key={i}
-              className={
-                `border-yellow-700 min-w-[2em] border-2 rounded-md ${colorMap.get(
-                  keyObj.status
-                )}` /* +
-                "hover:opacity-60" */
-              }
-              value={keyObj.char}
-              // onClick={() => keyPassed(key)}
+              className={`border-yellow-700 min-w-[2em] border-2 rounded-md text-center ${
+                colorMap.get(getStyleCode(key, board)) || ""
+              }`}
             >
-              {keyObj.char}
-            </button>
+              {key}
+            </div>
           ))}
         </div>
       ))}

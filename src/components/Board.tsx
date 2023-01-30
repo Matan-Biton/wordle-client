@@ -1,32 +1,18 @@
-import { useContext } from "react";
-import { colorMap } from "../constantsAndTypes";
-import { wordleContext } from "../providers/wordleContext";
+import { board } from "../constantsAndTypes";
+import { Attempt } from "./attempt";
 
-export function Board() {
-  const { board, handleInputChange } = useContext(wordleContext);
+interface IProps {
+  board: board;
+  inputHandler: (e: React.ChangeEvent<HTMLInputElement>, guessIndex: number, charIndex: number) => void;
+}
 
-  const validation = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    !e.key.match(/^[a-z]$/i) && e.preventDefault();
-  };
+export function Board(props: IProps) {
+  const { board, inputHandler } = props;
 
   return (
     <div className="flex flex-col gap-2">
-      {board.map((row, guessIndex) => (
-        <div className="flex justify-center gap-2" key={guessIndex}>
-          {row.map((tile, charIndex) => (
-            <input
-              key={charIndex}
-              type="text"
-              className={`tile text-center text-2xl font-bold uppercase border-2 border-gray-400 rounded-md w-[7vh] h-[7vh] ${colorMap.get(
-                tile.status
-              )} cursor-pointer disabled:cursor-not-allowed`}
-              defaultValue={tile.char}
-              maxLength={1}
-              onKeyDown={validation}
-              onChange={(e) => handleInputChange(e, guessIndex, charIndex)}
-            />
-          ))}
-        </div>
+      {board.map((row, attemptIdx) => (
+        <Attempt attempt={row} attemptIdx={attemptIdx} inputHandler={inputHandler} key={attemptIdx} />
       ))}
     </div>
   );
